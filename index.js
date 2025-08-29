@@ -3,13 +3,13 @@ import express from "express";
 const app = express();
 app.use(express.json());
 
-// Your details
+
 const FULL_NAME = "eniya_sre_ag";
 const DOB = "08012005";
 const EMAIL = "eniyasre05@gmail.com";
 const ROLL_NUMBER = "22BPS1002";
 
-// Helpers
+
 function isNumeric(str) {
   return /^[0-9]+$/.test(str);
 }
@@ -21,7 +21,15 @@ function alternateCaps(str) {
   return result;
 }
 
-// POST /bfhl
+
+app.get("/bfhl", (req, res) => {
+  res.status(200).json({
+    is_success: true,
+    message: "Use POST request with JSON body"
+  });
+});
+
+
 app.post("/bfhl", (req, res) => {
   try {
     if (!req.body || !Array.isArray(req.body.data)) {
@@ -76,10 +84,10 @@ app.post("/bfhl", (req, res) => {
   }
 });
 
-// fallback
+
 app.use((req, res) => {
   res.status(404).json({ is_success: false, message: "Route not found" });
 });
 
-// 🚀 Export app for Vercel
+
 export default app;
