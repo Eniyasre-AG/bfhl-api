@@ -1,11 +1,11 @@
 import express from "express";
 
 const app = express();
-app.use(express.json()); // middleware for parsing JSON
+app.use(express.json());
 
-// Your details (replace with yours!)
-const FULL_NAME = "eniya_sre_ a_g";
-const DOB = "08012005"; 
+// Your details
+const FULL_NAME = "eniya_sre_ag";
+const DOB = "08012005";
 const EMAIL = "eniyasre05@gmail.com";
 const ROLL_NUMBER = "22BPS1002";
 
@@ -13,7 +13,6 @@ const ROLL_NUMBER = "22BPS1002";
 function isNumeric(str) {
   return /^[0-9]+$/.test(str);
 }
-
 function alternateCaps(str) {
   let result = "";
   for (let i = 0; i < str.length; i++) {
@@ -59,7 +58,7 @@ app.post("/bfhl", (req, res) => {
 
     return res.status(200).json({
       is_success: true,
-      user_id: `${FULL_NAME}_${DOB}`, // lowercase full name
+      user_id: `${FULL_NAME}_${DOB}`,
       email: EMAIL,
       roll_number: ROLL_NUMBER,
       odd_numbers,
@@ -77,11 +76,10 @@ app.post("/bfhl", (req, res) => {
   }
 });
 
-// fallback route
+// fallback
 app.use((req, res) => {
   res.status(404).json({ is_success: false, message: "Route not found" });
 });
 
-// start local server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// 🚀 Export app for Vercel
+export default app;
